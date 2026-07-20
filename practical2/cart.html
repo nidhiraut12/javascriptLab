@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Corner | Your Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shop-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">style <span>corner</span></a>
+      <a class="cart-link active" href="cart.html"><span class="cart-icon">🛍</span> Cart <span id="cart-count" class="cart-count">0</span></a>
+    </header>
+
+    <div class="page-intro"><p class="eyebrow">YOUR SELECTION</p><h1>Shopping <em>bag.</em></h1><a class="back-link" href="index.html">← Continue shopping</a></div>
+    <div class="cart-layout">
+      <section class="cart-panel" aria-labelledby="bag-heading">
+        <h2 id="bag-heading">Your items</h2>
+        <div id="cart-items"></div>
+      </section>
+      <aside class="summary-panel">
+        <h2>Order summary</h2>
+        <label for="customer-name">Customer name</label>
+        <input id="customer-name" type="text" placeholder="Enter your name">
+        <div class="summary-line"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+        <div class="summary-line total"><span>Total</span><strong id="total">₹0</strong></div>
+        <button id="calculate-bill" class="primary-button"><span>▣</span> Calculate bill</button>
+        <button id="generate-bill" class="secondary-button" disabled>Generate bill</button>
+      </aside>
+    </div>
+    <section id="invoice" class="invoice" hidden></section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
