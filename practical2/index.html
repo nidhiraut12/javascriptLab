@@ -1,1 +1,36 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Corner | Products</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shop-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">style <span>corner</span></a>
+      <a class="cart-link" href="cart.html" aria-label="View shopping cart">
+        <span class="cart-icon">🛍</span> Cart <span id="cart-count" class="cart-count">0</span>
+      </a>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">CURATED FOR YOU</p>
+      <h1>Find your next<br><em>favourite look.</em></h1>
+      <p>Choose the pieces you love and add them to your bag.</p>
+    </section>
+
+    <section aria-labelledby="products-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">SHOP THE COLLECTION</p><h2 id="products-heading">Featured products</h2></div>
+        <a href="cart.html">View cart →</a>
+      </div>
+      <div id="product-list" class="product-grid"></div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
