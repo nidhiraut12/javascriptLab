@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Student Marks Array Analyzer</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 6px;
+        }
+
+        .section {
+            margin-top: 20px;
+            padding: 18px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+
+        input {
+            padding: 9px;
+            width: 160px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .danger {
+            background: #dc3545;
+        }
+
+        .danger:hover {
+            background: #a71d2a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            background: #007BFF;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 18px;
+            background: #eef6ff;
+            border-left: 5px solid #007BFF;
+            font-size: 17px;
+        }
+
+        .analysis {
+            display: flex;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px #ccc;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .history {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f8f8;
+        }
+
+        li {
+            margin: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Student Marks Array Analyzer</h1>
+
+
+    <!-- ==========================================
+         ADD STUDENT
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Add Student</h2>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Student Name"
+        >
+
+        <input
+            type="text"
+            id="subject"
+            placeholder="Subject"
+        >
+
+        <input
+            type="number"
+            id="marks"
+            placeholder="Marks"
+            min="0"
+            max="100"
+        >
+
+        <br>
+
+        <button onclick="addStudent()">
+            ADD STUDENT
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         STUDENT TABLE
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Student Records</h2>
+
+        <table id="studentTable">
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- ==========================================
+         ARRAY OPERATIONS
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Array Operations</h2>
+
+        <button onclick="pushStudent()">
+            PUSH
+        </button>
+
+        <button onclick="popStudent()">
+            POP
+        </button>
+
+        <button onclick="shiftStudent()">
+            SHIFT
+        </button>
+
+        <button onclick="unshiftStudent()">
+            UNSHIFT
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         SPLICE
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Replace Student Marks - SPLICE</h2>
+
+        <input
+            type="number"
+            id="replaceID"
+            placeholder="Student ID"
+        >
+
+        <input
+            type="number"
+            id="newMarks"
+            placeholder="New Marks"
+            min="0"
+            max="100"
+        >
+
+        <button onclick="replaceMarks()">
+            SPLICE / REPLACE
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         SLICE
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>View Part of Array - SLICE</h2>
+
+        <input
+            type="number"
+            id="sliceStart"
+            placeholder="Start Index"
+        >
+
+        <input
+            type="number"
+            id="sliceEnd"
+            placeholder="End Index"
+        >
+
+        <button onclick="sliceStudents()">
+            SLICE
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         ARRAY METHODS
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Array Methods</h2>
+
+        <button onclick="mapStudents()">
+            MAP
+        </button>
+
+        <button onclick="filterStudents()">
+            FILTER
+        </button>
+
+        <button onclick="forEachStudents()">
+            FOREACH
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         PERFORMANCE ANALYSIS
+         ========================================== -->
+
+    <div class="section">
+
+        <h2>Performance Analysis</h2>
+
+        <button onclick="findHighestLowest()">
+            Find Maximum & Minimum
+        </button>
+
+        <div class="analysis">
+
+            <div class="card">
+
+                <h3>Highest Marks</h3>
+
+                <p id="highest">
+                    -
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Lowest Marks</h3>
+
+                <p id="lowest">
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RESULT
+         ========================================== -->
+
+    <div class="result">
+
+        <strong>Result:</strong>
+
+        <p id="result">
+            Select an operation to see the result.
+        </p>
+
+    </div>
+
+
+    <!-- ==========================================
+         HISTORY
+         ========================================== -->
+
+    <div class="history">
+
+        <h2>Operation History</h2>
+
+        <ul id="historyList"></ul>
+
+    </div>
+
+
+    <button
+        class="danger"
+        onclick="resetStudents()"
+    >
+        Reset All Students
+    </button>
+
+
+</div>
+
+
+<script>
+
+
+/*
+====================================================
+ARRAY OF OBJECTS
+====================================================
+
+The main data structure is an ARRAY.
+
+Each element is an OBJECT.
+
+Each student object contains:
+
+    id
+    name
+    subject
+    marks
+====================================================
+*/
+
+let students = [
+
+    {
+        id: 1,
+        name: "Shravani",
+        subject: "JavaScript",
+        marks: 85
+    },
+
+    {
+        id: 2,
+        name: "Rahul",
+        subject: "JavaScript",
+        marks: 72
+    },
+
+    {
+        id: 3,
+        name: "Aditi",
+        subject: "JavaScript",
+        marks: 91
+    }
+
+];
+
+
+/*
+====================================================
+DISPLAY STUDENTS
+====================================================
+
+forEach() is used to visit every
+student object and display it.
+====================================================
+*/
+
+function displayStudents() {
+
+    let table =
+        document.getElementById("studentTable");
+
+
+    table.innerHTML = `
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+
+    `;
+
+
+    students.forEach(function(student) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${student.id}</td>
+
+                <td>${student.name}</td>
+
+                <td>${student.subject}</td>
+
+                <td>${student.marks}</td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/*
+====================================================
+ADD STUDENT
+====================================================
+*/
+
+function addStudent() {
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let subject =
+        document.getElementById("subject").value;
+
+    let marks =
+        parseInt(
+            document.getElementById("marks").value
+        );
+
+
+    if (
+        name === "" ||
+        subject === "" ||
+        isNaN(marks)
+    ) {
+
+        alert("Please enter all student details.");
+
+        return;
+
+    }
+
+
+    if (marks < 0 || marks > 100) {
+
+        alert("Marks must be between 0 and 100.");
+
+        return;
+
+    }
+
+
+    /*
+    Create student object.
+    */
+
+    let student = {
+
+        id: students.length + 1,
+
+        name: name,
+
+        subject: subject,
+
+        marks: marks
+
+    };
+
+
+    /*
+    PUSH object into array.
+    */
+
+    students.push(student);
+
+
+    displayStudents();
+
+
+    showResult(
+        "Student " +
+        name +
+        " added successfully."
+    );
+
+
+    addHistory(
+        "push() → Added " +
+        name +
+        " with " +
+        marks +
+        " marks."
+    );
+
+
+    document.getElementById("studentName").value = "";
+
+    document.getElementById("subject").value = "";
+
+    document.getElementById("marks").value = "";
+
+}
+
+
+/*
+====================================================
+PUSH()
+====================================================
+
+This function is separate so that
+the PUSH operation is clearly demonstrated.
+====================================================
+*/
+
+function pushStudent() {
+
+    addStudent();
+
+}
+
+
+/*
+====================================================
+POP()
+====================================================
+
+Removes the LAST student object.
+====================================================
+*/
+
+function popStudent() {
+
+    if (students.length === 0) {
+
+        alert("No students available.");
+
+        return;
+
+    }
+
+
+    let removed =
+        students.pop();
+
+
+    displayStudents();
+
+
+    showResult(
+        "POP: Removed " +
+        removed.name +
+        " from the array."
+    );
+
+
+    addHistory(
+        "pop() → Removed " +
+        removed.name
+    );
+
+}
+
+
+/*
+====================================================
+SHIFT()
+====================================================
+
+Removes the FIRST student object.
+====================================================
+*/
+
+function shiftStudent() {
+
+    if (students.length === 0) {
+
+        alert("No students available.");
+
+        return;
+
+    }
+
+
+    let removed =
+        students.shift();
+
+
+    updateIDs();
+
+
+    displayStudents();
+
+
+    showResult(
+        "SHIFT: Removed " +
+        removed.name +
+        " from the beginning."
+    );
+
+
+    addHistory(
+        "shift() → Removed " +
+        removed.name
+    );
+
+}
+
+
+/*
+====================================================
+UNSHIFT()
+====================================================
+
+Adds a sample student at the
+BEGINNING of the array.
+====================================================
+*/
+
+function unshiftStudent() {
+
+    let name =
+        prompt("Enter student name:");
+
+    let subject =
+        prompt("Enter subject:");
+
+    let marks =
+        parseInt(
+            prompt("Enter marks:")
+        );
+
+
+    if (
+        name === null ||
+        subject === null ||
+        isNaN(marks)
+    ) {
+
+        return;
+
+    }
+
+
+    if (marks < 0 || marks > 100) {
+
+        alert("Marks must be between 0 and 100.");
+
+        return;
+
+    }
+
+
+    let student = {
+
+        id: 0,
+
+        name: name,
+
+        subject: subject,
+
+        marks: marks
+
+    };
+
+
+    students.unshift(student);
+
+
+    updateIDs();
+
+
+    displayStudents();
+
+
+    showResult(
+        "UNSHIFT: " +
+        name +
+        " added at the beginning."
+    );
+
+
+    addHistory(
+        "unshift() → Added " +
+        name
+    );
+
+}
+
+
+/*
+====================================================
+UPDATE IDs
+====================================================
+*/
+
+function updateIDs() {
+
+    students.forEach(function(student, index) {
+
+        student.id = index + 1;
+
+    });
+
+}
+
+
+/*
+====================================================
+SPLICE()
+====================================================
+
+Used here to REPLACE the marks
+of a student.
+
+Example:
+
+Original:
+Shravani → 85
+
+New:
+Shravani → 92
+====================================================
+*/
+
+function replaceMarks() {
+
+    let id =
+        parseInt(
+            document.getElementById("replaceID").value
+        );
+
+    let newMarks =
+        parseInt(
+            document.getElementById("newMarks").value
+        );
+
+
+    if (isNaN(id) || isNaN(newMarks)) {
+
+        alert(
+            "Please enter student ID and new marks."
+        );
+
+        return;
+
+    }
+
+
+    if (newMarks < 0 || newMarks > 100) {
+
+        alert("Marks must be between 0 and 100.");
+
+        return;
+
+    }
+
+
+    /*
+    Find the index of the student.
+    */
+
+    let index =
+        students.findIndex(function(student) {
+
+            return student.id === id;
+
+        });
+
+
+    if (index === -1) {
+
+        alert("Student ID not found.");
+
+        return;
+
+    }
+
+
+    /*
+    Create updated object.
+    */
+
+    let updatedStudent = {
+
+        id: students[index].id,
+
+        name: students[index].name,
+
+        subject: students[index].subject,
+
+        marks: newMarks
+
+    };
+
+
+    /*
+    SPLICE replaces the old object.
+    */
+
+    students.splice(
+        index,
+        1,
+        updatedStudent
+    );
+
+
+    displayStudents();
+
+
+    showResult(
+        "SPLICE: Marks updated successfully."
+    );
+
+
+    addHistory(
+        "splice() → Updated marks of " +
+        updatedStudent.name +
+        " to " +
+        newMarks
+    );
+
+
+    document.getElementById("replaceID").value = "";
+
+    document.getElementById("newMarks").value = "";
+
+}
+
+
+/*
+====================================================
+SLICE()
+====================================================
+
+Returns a portion of the student array.
+
+The original array is NOT changed.
+====================================================
+*/
+
+function sliceStudents() {
+
+    let start =
+        parseInt(
+            document.getElementById("sliceStart").value
+        );
+
+    let end =
+        parseInt(
+            document.getElementById("sliceEnd").value
+        );
+
+
+    if (isNaN(start) || isNaN(end)) {
+
+        alert(
+            "Please enter start and end index."
+        );
+
+        return;
+
+    }
+
+
+    let selectedStudents =
+        students.slice(start, end);
+
+
+    let output = "";
+
+
+    selectedStudents.forEach(function(student) {
+
+        output +=
+            student.name +
+            " - " +
+            student.marks +
+            " marks<br>";
+
+    });
+
+
+    showResult(
+        "<b>SLICE Result:</b><br><br>" +
+        output
+    );
+
+
+    addHistory(
+        "slice(" +
+        start +
+        ", " +
+        end +
+        ") → Displayed selected students."
+    );
+
+
+    document.getElementById("sliceStart").value = "";
+
+    document.getElementById("sliceEnd").value = "";
+
+}
+
+
+/*
+====================================================
+MAP()
+====================================================
+
+Creates a NEW array.
+
+Here we create a list of
+student names and marks.
+====================================================
+*/
+
+function mapStudents() {
+
+    let result =
+        students.map(function(student) {
+
+            return (
+                student.name +
+                " → " +
+                student.marks +
+                "%"
+            );
+
+        });
+
+
+    showResult(
+        "<b>MAP Result:</b><br><br>" +
+        result.join("<br>")
+    );
+
+
+    addHistory(
+        "map() → Created student marks list."
+    );
+
+}
+
+
+/*
+====================================================
+FILTER()
+====================================================
+
+Find students who scored
+75 or more marks.
+====================================================
+*/
+
+function filterStudents() {
+
+    let toppers =
+        students.filter(function(student) {
+
+            return student.marks >= 75;
+
+        });
+
+
+    if (toppers.length === 0) {
+
+        showResult(
+            "No students scored 75 or above."
+        );
+
+        return;
+
+    }
+
+
+    let output = "";
+
+
+    toppers.forEach(function(student) {
+
+        output +=
+            student.name +
+            " → " +
+            student.marks +
+            " marks<br>";
+
+    });
+
+
+    showResult(
+        "<b>FILTER Result:</b><br>" +
+        "Students scoring 75 or above:<br><br>" +
+        output
+    );
+
+
+    addHistory(
+        "filter() → Found " +
+        toppers.length +
+        " students scoring 75 or above."
+    );
+
+}
+
+
+/*
+====================================================
+FOREACH()
+====================================================
+
+Visits every student object.
+====================================================
+*/
+
+function forEachStudents() {
+
+    let output = "";
+
+
+    students.forEach(function(student) {
+
+        output +=
+            "ID: " +
+            student.id +
+            " | " +
+            student.name +
+            " | " +
+            student.marks +
+            " marks<br>";
+
+    });
+
+
+    showResult(
+        "<b>FOREACH Result:</b><br><br>" +
+        output
+    );
+
+
+    addHistory(
+        "forEach() → Visited " +
+        students.length +
+        " student objects."
+    );
+
+}
+
+
+/*
+====================================================
+MAXIMUM AND MINIMUM
+====================================================
+
+Uses a FOR LOOP to find:
+
+1. Student with highest marks
+2. Student with lowest marks
+====================================================
+*/
+
+function findHighestLowest() {
+
+    if (students.length === 0) {
+
+        alert("No students available.");
+
+        return;
+
+    }
+
+
+    /*
+    Initially assume the first student
+    has both the highest and lowest marks.
+    */
+
+    let highest =
+        students[0];
+
+    let lowest =
+        students[0];
+
+
+    /*
+    FOR LOOP
+    */
+
+    for (
+        let i = 1;
+        i < students.length;
+        i++
+    ) {
+
+
+        /*
+        Check highest marks.
+        */
+
+        if (
+            students[i].marks >
+            highest.marks
+        ) {
+
+            highest =
+                students[i];
+
+        }
+
+
+        /*
+        Check lowest marks.
+        */
+
+        if (
+            students[i].marks <
+            lowest.marks
+        ) {
+
+            lowest =
+                students[i];
+
+        }
+
+    }
+
+
+    /*
+    Display highest.
+    */
+
+    document.getElementById("highest").innerHTML =
+
+        "<b>" +
+        highest.name +
+        "</b><br>" +
+
+        highest.marks +
+        " Marks";
+
+
+    /*
+    Display lowest.
+    */
+
+    document.getElementById("lowest").innerHTML =
+
+        "<b>" +
+        lowest.name +
+        "</b><br>" +
+
+        lowest.marks +
+        " Marks";
+
+
+    showResult(
+
+        "<b>Highest Marks:</b> " +
+        highest.name +
+        " - " +
+        highest.marks +
+
+        "<br><br>" +
+
+        "<b>Lowest Marks:</b> " +
+        lowest.name +
+        " - " +
+        lowest.marks
+
+    );
+
+
+    addHistory(
+
+        "Maximum = " +
+        highest.name +
+        " (" +
+        highest.marks +
+        "), Minimum = " +
+        lowest.name +
+        " (" +
+        lowest.marks +
+        ")"
+
+    );
+
+}
+
+
+/*
+====================================================
+RESULT
+====================================================
+*/
+
+function showResult(message) {
+
+    document.getElementById("result").innerHTML =
+        message;
+
+}
+
+
+/*
+====================================================
+HISTORY
+====================================================
+*/
+
+function addHistory(message) {
+
+    document.getElementById("historyList").innerHTML +=
+
+        "<li>" +
+        message +
+        "</li>";
+
+}
+
+
+/*
+====================================================
+RESET
+====================================================
+*/
+
+function resetStudents() {
+
+    students = [
+
+        {
+            id: 1,
+            name: "Shravani",
+            subject: "JavaScript",
+            marks: 85
+        },
+
+        {
+            id: 2,
+            name: "Rahul",
+            subject: "JavaScript",
+            marks: 72
+        },
+
+        {
+            id: 3,
+            name: "Aditi",
+            subject: "JavaScript",
+            marks: 91
+        }
+
+    ];
+
+
+    displayStudents();
+
+
+    document.getElementById("highest").innerHTML = "-";
+
+    document.getElementById("lowest").innerHTML = "-";
+
+
+    showResult(
+        "Student records have been reset."
+    );
+
+
+    addHistory(
+        "Array reset."
+    );
+
+}
+
+
+/*
+====================================================
+INITIAL DISPLAY
+====================================================
+*/
+
+displayStudents();
+
+
+</script>
+
+</body>
+
+</html>
